@@ -158,20 +158,21 @@ class Button {
     mask.rect(x, y, tw+m+32, 36, 3);
     mask.endDraw();
     ink.mask(mask);
+
   }
   boolean bang(){
   return bang;
   }
   void MouseReleased() {
+          bang=false;
+
     l = false;
     a1=true;
     a2=true;
     a3=true;
-    bang=false;
   }
   void MousePressed() {
     if (s) { 
-
       if (a2==true) {
         bang=true;
         o=255;
@@ -179,10 +180,8 @@ class Button {
         Ani.to(this, .3, "rc", w);
         Ani.to(this, .3, "o", 0);
         a2=false;
-                bang=false;
 
       }
-      l = true;
     } else {
       l = false;
     }
@@ -190,7 +189,7 @@ class Button {
 
     void MouseClicked() {
     if (s) { 
-        bang=true;
+        bang=false;
       }
   }
 }
@@ -280,6 +279,7 @@ class Card{
   float h;
     float g = 4;
     boolean a = true;
+    boolean a2 = true;
   Card(float tempx, float tempy, float tempw,float temph){
     x=tempx;
     y=tempy;
@@ -305,8 +305,21 @@ class Card{
     Ani.to(this,0.3,"w",newW);
     Ani.to(this,0.4,"h",newH);
     a=false;
+  } else{
+    a=true;
   }
   }
+
+    void move(float newX, float newY){
+    if(a2){
+    Ani.to(this,0.3,"x",newX);
+    Ani.to(this,0.4,"y",newY);
+    a2=false;
+  } else{
+    a2=true;
+  }
+  }
+}
 
 class Fab {
   
@@ -327,7 +340,7 @@ class Fab {
   boolean a1=true;
   boolean a2=true;
   boolean a3=true;
-  Fab( int tempx, int tempy) {
+  Fab(int tempx, int tempy) {
     x=tempx;
     y=tempy;
   }
@@ -348,14 +361,18 @@ class Fab {
       if (a1==true) {
 
           Ani.to(this, .1, "ty", -2);
-        
+                  Ani.to(this, .1, "appS", r+10);
+
         a1=false;
       }
       if (!l) {
       }
     } else {
       if (a3==true) {
-        Ani.to(this, .1, "ty", 0);
+        Ani.to(this, .05, "ty", 0);
+                          Ani.to(this, .05, "appS", r+5);
+
+
         ty=0;
         a3=false;
       }
@@ -373,7 +390,7 @@ class Fab {
     update();
     noStroke();
         ellipseMode(CENTER);
-    fill(0,12);
+    fill(0,9);
     for (int i=0; i<g; i++ ) {
       ellipse(x+(r/2), y+6-(i/2)+(r/2), appS-i, appS-i);
     }
@@ -415,4 +432,3 @@ class Fab {
   }
 }
 
-}

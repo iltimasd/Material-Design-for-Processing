@@ -17,7 +17,7 @@ iltimasd.github.io
 
 Button button1;
 Button button2;
-
+Fab fab1;
 Slider slider1;
 Slider slider2; 
 Card card1;
@@ -29,10 +29,11 @@ void setup() {
   slider1 = new Slider(150, 50, 150);
   button1 = new Button("I'm a button!!", 400, 415);
     button2 = new Button("read my mind", 400, 545);
+    fab1= new Fab(550,500);
 
   card1 = new Card(20,20,width-40,height-40);
 }
-
+int x;
 void draw() {
   //for live code purposes
   button1.text="I'm a button!!!!!!!!!!";
@@ -47,7 +48,8 @@ void draw() {
   button1.display();
   if (button1.bang()) {
     button1.setColor("red");
-      card1.resize(200,200);
+      card1.resize(random(600),random(600));
+      card1.move(random(300),random(300));
   }
   button1.raised=true;
       button2.setColor("teal");
@@ -55,14 +57,16 @@ void draw() {
     button2.display();
     if (button2.bang()) {
        text("true", 450, 610);
+       x+=1;
 
     } else {
        text("false", 450, 610);
 
     }
-     
+     text(x, 500,500);
   slider2.display();
   slider2.setColor("red");
+  fab1.display();
     rect(slider2.value()*width,300,30,30);
 }
 
@@ -74,13 +78,13 @@ void mouseReleased() {
   slider1.MouseReleased();
   slider2.MouseReleased();
   button1.MouseReleased();
-    button2.MouseReleased();
+  button2.MouseReleased();
 
 }
 
 void mouseClicked(){
-    button1.MouseClicked();
-        button2.MouseClicked();
+  button1.MouseClicked();
+  button2.MouseClicked();
 
 }
 
@@ -88,7 +92,7 @@ void mousePressed() {
   slider1.MousePressed();
   slider2.MousePressed();
   button1.MousePressed();
-    button2.MousePressed();
+  button2.MousePressed();
 
 }
 
